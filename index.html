@@ -1,0 +1,619 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Porządek w kodzie, czyli jak zaimplentować Timber w WordPressie - Maciek Palmowski</title>
+
+		<meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+		<meta name="author" content="Hakim El Hattab">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link href="https://fonts.googleapis.com/css?family=Rubik:300,400,500,700&amp;subset=latin-ext" rel="stylesheet">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/white.css" id="theme">
+		<link rel="stylesheet" href="css/wordcamp.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+		<div class="logo-sa">
+			<img src="img/sa-logo.png" />
+		</div>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+                <section>
+                        <div class="inner">
+                            <div class="inner-full">
+                                <h1 class="title header-color">Instalacja</h1>
+                                <div class="text">
+                                    <ol>
+                                    <li>
+                                        Pobierzcie motyw z https://github.com/palmiak/timber_wcpoznan_2018
+                                    </li>
+                                    <li>
+                                        Rozpakujcie data/plugins.zip to wp-content/plugins
+                                    </li>
+                                    <li>
+                                        Uruchomcie wszystkie pluginy
+                                    </li>
+                                    <li>
+                                        Zaimportujcie dane z data/xygrid.wordpress.2018-07-04.xml
+                                    </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+				<section>
+					<div class="inner">
+						<div class="inner-left">
+							<h1 class="title header-color"><span>01</span>Porządek w kodzie, czyli jak zaimplentować Timber w WordPressie</h1>
+							<div class="text">
+								<p>
+									Podczas warsztatów dowiemy się, jak wprowadzić Timbera do WordPressa – od podstaw Twiga, poprzez omówienie funkcji Timbera, na rozszerzaniu funkcjonalności kończąc.
+								</p>
+							</div>
+						</div>
+						<div class="inner-right">
+							<div class="photobg-inner">
+								<div class="label">
+									Maciek Palmowski
+								</div>
+								<div class="photobg" style="background-image: url('img/laptop.jpg')">
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<div class="inner">
+						<div class="inner-full">
+							<h1 class="title header-color"><span>02</span>Czym jest Timber?</h1>
+							<div class="text">
+								<p>
+                                    <center>Timber = Twig + WordPress + funkcje pomocnicze</center>
+                                </p>
+							</div>
+						</div>
+					</div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>03</span>Czemu warto go używać?</h1>
+                            <div class="text">
+                                <ul>
+                                    <li>wymusza rozdzielenie warstwy odpowiadającej za wygląd od logiki</li>
+                                    <li>posiada czytelniejszą składnię niż "czysty" PHP</li>
+                                    <li>Twiga można używać nie tylko w WordPress</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <section>
+                    <div class="inner">
+                        <div class="inner-right">
+                            <div class="photobg-inner">
+                                <div class="photobg" style="background-image: url('img/laptop.jpg')">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="inner-left">
+                            <h1 class="title header-color"><span>04</span>Czym jest Twig?</h1>
+                            <div class="text">
+                                    <p>
+                                        <strong>Twig</strong> to system templatek stworzony z myślą o PHP. Jest to jeden z wielu projektów <strong>Frameworka Symfony</strong>.
+                                    </p>
+                                    <p>
+                                        Jak sami o sobie piszą, jest:
+                                    </p>
+                                    <ul>
+                                        <li>szybki</li>
+                                        <li>bezpieczny</li>
+                                        <li>elastyczny</li>
+                                    </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>05</span>Instalacja</h1>
+                            <div class="text">
+                                <h2>Plugin</h2>
+                                <p>Instalujemy plugin z repozytorium WordPress</p>
+                                <p>Tak, to wszystko :)</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>06</span>Instalacja</h1>
+                            <div class="text">
+                                <h2>Composer</h2>
+<pre>
+<code class="bash">composer require timber/timber
+</code>
+</pre>
+
+                                <p>Jeżeli nie używamy autoload z Composera, do functions.php dopisujemy: </p>
+<pre><code class="php">require_once( __DIR__ . '/vendor/autoload.php' );
+</code>
+</pre>
+                                <p>Inicjalizujemy Timbera: </p>
+<pre><code class="php">$timber = new Timber\Timber();
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>07</span>Układ plików</h1>
+                            <div class="text">
+<pre>
+<code class="bash">nasz-motyw
+-- lib
+---- Class-post.php
+---- Class-post-type.php
+---- ... 
+-- views 
+---- layouts
+------ base.twig 
+---- parts 
+------ entry.twig 
+------ header.twig 
+------ footer.twig 
+---- templates 
+------ front-page.twig
+-- functions.php 
+-- front-page.php 
+-- ...
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>08</span>Składnia Twiga</h1>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>09</span>Funkcja echo</h1>
+                            <div class="text">
+<pre>
+<code>
+&lt;?php echo $foo; ?&gt;
+
+{{ foo }}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>10</span>Komentarze w kodzie</h1>
+                            <div class="text">
+<pre>
+<code>
+// To jest Komentarze
+
+/* 
+    To też jest komentarz
+    Tylko troszkę dłuższy
+*/
+
+{# 
+    A to komentarz w Twigu
+#}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>11</span>Instrukcje warunkowe</h1>
+                            <div class="text">
+<pre>
+<code>&lt;?php
+if( $a == 1 ) {
+    // zróbmy coś fajnego
+} else {
+    // zróbmy coś innego
+} 
+?&gt;
+
+{% if a == 1 %}
+    {# zróbmy coś fajnego #}
+{% else %}
+    {# zróbmy coś innego #}
+{% endif %}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>12</span>Instrukcje warunkowe</h1>
+                            <div class="text">
+<pre>
+<code>
+&lt;?php
+echo $foo ? 'prawda' : 'fałsz';
+?&gt;
+
+{{ foo ? 'prawda' : 'fałsz' }}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>13</span>Pętle</h1>
+                            <div class="text">
+<pre>
+<code>&lt;?php
+foreach ( $posts as $post ) {
+    // zróbmy coś
+}
+?&gt;
+
+{% for post in posts %}
+    {# zróbmy coś #}
+{% endfor %}</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>14</span>Pętle</h1>
+                            <div class="text">
+<pre>
+<code>&lt;?php
+$i = 0;
+foreach ( $posts as $post ) {
+    // zróbmy coś
+    if ( $i==2 ) {
+        break;
+    } else {
+        $i++;
+    }
+}
+?&gt;
+
+{% for post in posts | slice(0,3) %}
+    {# zróbmy coś #}
+{% endfor %}</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>15</span>Pętle</h1>
+                            <div class="text">
+<pre>
+<code>{% for post in posts %}
+    {{ loop.index0 }}
+    {{ loop.index }}
+    {{ if loop.first ? 'To dopiero początek' }}
+    {{ if loop.last ? 'To już jest koniec' }}
+{% endfor %}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>16</span>Include</h1>
+                            <div class="text">
+<pre>
+<code>&lt;?php
+    include( 'file.php' );
+?&gt;
+
+{% include 'file.twig' %}
+
+{% include 'file.twig' with { 'foo' : 'bar' } %}
+{% include 'file.twig' with { 'foo' : 'bar' } only %}
+{% include ['file-'~ post.slug ~'.twig', 'file.twig'] ignore missing %}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>17</span>Filtry</h1>
+                            <div class="text">
+<pre>
+<code>&lt;?php
+    $array = array_slice($array, 2, 2);
+
+    foreach( $array as $val ){
+        // zróbmy coś
+    }
+?&gt;
+
+{% for val in array|slice(2,2) %}
+    {# zróbmy coś #}
+{% endfor %}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>18</span>Filtry</h1>
+                            <div class="text">
+<pre>
+<code>&lt;?php
+    $string = urlencode( strtolower( trim( $string ) ) );
+?&gt;
+
+{{ string | trim | lower | urlencode }}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>19</span>Bloki</h1>
+                            <div class="text">
+<pre>
+<code>base.twig
+&lt;body&gt;
+{% block header %}
+HEADER
+{% endblock %}
+
+{% block content %}
+CONTENT
+{% endblock %}
+
+{% block footer %}
+FOOTER
+{% endblock %}
+&lt;/body&gt;
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>20</span>Bloki</h1>
+                            <div class="text">
+<pre>
+<code>index.twig
+{% extends "layouts/base.twig" %}
+{% block content %}
+INNY CONTENT
+{% endblock %}
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="inner">
+                        <div class="inner-full">
+                            <h1 class="title header-color"><span>21</span>Bloki</h1>
+                            <div class="text">
+<pre>
+<code>
+HEADER
+
+INNY CONTENT 
+
+FOOTER
+</code>
+</pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--
+				<section>
+					<div class="inner">
+						<div class="inner-full">
+							<h1 class="title header-color"><span>03</span>Slide z kodem</h1>
+							<div class="text">
+								<p>
+									Vestibulum id rutrum nibh. In auctor nunc a erat hendrerit dapibus. Etiam vestibulum lacus a finibus pellentesque
+								</p>
+                                <pre>
+                                <code>&lt;section class="article-content"&gt;
+                                    &lt;h1 class="article-h1"&gt;{{ post.title }}&lt;/h1&gt;
+                                    &lt;h2 class="article-h2"&gt;{{ post.subtitle }}&lt;/h2&gt;>
+                                    &lt;p class="blog-author"&gt;
+                                        {{ post.author.name }}
+                                        {{ post.post_date | date }}
+                                    &lt;/p&gt;
+                                    {{ post.content }}
+                                &lt;/section&gt;</code>
+                                </pre>
+                                <p>
+                                    Vestibulum id rutrum nibh. In auctor nunc a erat hendrerit dapibus. Etiam vestibulum lacus a finibus pellentesque
+                                </p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<div class="inner">
+						<div class="inner-right">
+							<div class="photobg-inner">
+								<div class="photobg" style="background-image: url('img/laptop.jpg')">
+								</div>
+							</div>
+						</div>
+						<div class="inner-left">
+							<h1 class="title header-color"><span>04</span>Obrazek po lewej</h1>
+							<div class="text">
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur odio sem, blandit ac urna vitae, semper placerat tellus. Sed egestas nibh eget pulvinar fermentum. Etiam porta a ex et ultricies. Vivamus cursus, lectus sit amet placerat convallis, ante libero mollis eros, ut ultricies nibh justo vitae purus. Fusce feugiat orci ac urna varius eleifend. Nullam ut fringilla ex.
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur odio sem, blandit ac urna vitae, semper placerat tellus. Sed egestas nibh eget pulvinar fermentum.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+				<section class="colorbg" data-background="#304DC3" data-transition="slide" data-background-transition="zoom">
+					<div class="inner">
+						<div class="inner-full">
+							<h1 class="title header-color"><span>05</span>Slide z kolorem tła</h1>
+							<div class="text">
+								<p>
+									Vestibulum id rutrum nibh. In auctor nunc a erat hendrerit dapibus. Etiam vestibulum lacus a finibus pellentesque
+								</p>
+								<p>
+									Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vitae urna sed risus imperdiet accumsan. Donec eleifend, libero quis posuere porta, urna nulla varius nisi, eget ultricies nisi lectus vitae diam. Integer bibendum ullamcorper ex vitae dapibus.
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+            -->
+				<section>
+					<div class="inner">
+						<div class="inner-right">
+							<div class="photobg-inner">
+								<div class="photobg" style="background-image: url('img/maciek.jpg')">
+								</div>
+							</div>
+						</div>
+						<div class="inner-left">
+							<h1 class="title header-color"><span>06</span>Dziękuję za udział w warsztatch!</h1>
+							<div class="text">
+								<h2>Maciek Palmowski</h2>
+								<p>
+									<small>email</small>
+									m.palmowski@spiders.agency
+								</p>
+								<p>
+									<small>wordpress.org</small>
+									profiles.wordpress.org/palmiak
+								</p>
+								<p>
+									<small>github</small>
+									github.com/palmiak
+								</p>
+								<p>
+									<small>CTO & WordPress Developer</small>
+									www.spiders.agency
+								</p>
+							</div>
+						</div>
+					</div>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// More info https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+
+				transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+				// More info https://github.com/hakimel/reveal.js#dependencies
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/search/search.js', async: true },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>
