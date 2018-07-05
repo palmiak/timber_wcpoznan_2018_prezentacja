@@ -160,6 +160,10 @@
 	margin-bottom: 15px;
 }
 
+.text .blue {
+  color: var(--blue-color)!important;
+}
+
 .text h2,
 .text h3,
 .text h4,
@@ -174,6 +178,11 @@
 .text ul {
 	margin: 20px 0!important;
 	list-style-type: none;
+}
+
+.text .large li {
+  font-size: 40px!important;
+  margin-bottom: 20px;
 }
 
 .text ul li {
