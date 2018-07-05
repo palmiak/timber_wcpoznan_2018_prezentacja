@@ -115,6 +115,16 @@
 	filter: grayscale(1);
 }
 
+.photobg.colorfull {
+  filter: grayscale(0)!important;
+}
+
+.photobg.shadow {
+  -webkit-box-shadow: 0px 0px 30px 0 #E6E6E6;
+  box-shadow: 0px 0px 30px 0 #E6E6E6;
+  border-radius: 10px;
+}
+
 .photobg-inner {
 	position: relative;
 }
@@ -183,6 +193,11 @@
 .text .large li {
   font-size: 40px!important;
   margin-bottom: 20px;
+}
+
+.text img {
+  border: none!important;
+  box-shadow: none!important;
 }
 
 .text ul li {
